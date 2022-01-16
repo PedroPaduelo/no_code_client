@@ -150,8 +150,8 @@ export default function TabelaFilter({
                       className={classes.TableCellDisplay}
                       {...cell.getCellProps()}
                     >
-                      {/* {JSON.stringify(cell.value)?.replace('"', '')?.replace('"', '')} */}
-                      {cell.render('Cell')}
+//                      {JSON.stringify(cell.value)?.replace('"', '')?.replace('"', '')} 
+                     
                     </TableCell>
                     )
                 })}
