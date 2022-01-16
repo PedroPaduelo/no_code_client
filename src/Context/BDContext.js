@@ -77,7 +77,6 @@ function BDProvider({ children }) {
 
 
   const ListCrudDadosBD = useCallback(async(dados) => {
-    console.log(dados)
     
     const {data} =  await api.get(`/ListCrud_DBA/${dados.table_name}`);
 

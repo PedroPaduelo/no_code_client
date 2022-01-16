@@ -150,8 +150,8 @@ export default function TabelaFilter({
                       className={classes.TableCellDisplay}
                       {...cell.getCellProps()}
                     >
-                      {/* {JSON.stringify(cell.value)?.replace('"', '')?.replace('"', '')} */}
-                      {cell.render('Cell')}
+                      {JSON.stringify(cell.value)?.replace('"', '')?.replace('"', '')}
+                      {/* {cell.render('Cell')} */}
                     </TableCell>
                     )
                 })}
@@ -166,7 +166,7 @@ export default function TabelaFilter({
 
 
 
-{/* 
+
       <Paginacao
         gotoPage = {gotoPage}
         previousPage = {previousPage}
@@ -176,7 +176,7 @@ export default function TabelaFilter({
         pageOptions = {pageOptions}
         pageCount = {pageCount}
         canNextPage = {canNextPage}
-      /> */}
+      />
 
     </Grid>
   );
