@@ -6,21 +6,24 @@ import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import { HeaderCuston } from './HeaderCuston';
 import ListTabelas from './ListTabelas';
 import { TabelasContext } from '../../../Context/DB/TabelasContext';
-
+import ModalCria from './ModalCria';
+import ModalEdita from './ModalEdita';
+import ModalDeleta from './ModalDeleta';
 import { CampoBuscaTable } from './CampoBuscaTable';
-import { ViewDadosTabela } from './ViewDadosTabela';
+import { CriaCamposTabelas } from './Campos/CriaCamposTabelas';
 
 
 
 
 
 
-export function Dados() {
+export function Tabelas() {
   const { 
     set_modal_cria_table,
     set_modal_cria_campo,
     set_loading,
-    loading
+    loading,
+    table
    } = useContext(TabelasContext);
 
 
@@ -64,7 +67,7 @@ export function Dados() {
 
       <Grid item xs={8}>
         <HeaderCuston
-          title={`Tabela selecionada `}
+          title={`Tabela selecionada ( ${table || ""} )`}
         >
           <IconButton 
             sx={{
@@ -78,20 +81,21 @@ export function Dados() {
         </HeaderCuston>
 
         <Box>
-          <ViewDadosTabela/>
+          <CriaCamposTabelas/>
         </Box>
       </Grid>
-
-
 
 
       <Backdrop
         sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
+        onClick={() => {set_loading(false)}}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-
+      <ModalDeleta/>
+      <ModalEdita/>
+      <ModalCria/>
     </Grid>
     
   );

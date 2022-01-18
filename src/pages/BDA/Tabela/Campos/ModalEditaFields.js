@@ -7,16 +7,18 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton, MenuItem } from '@mui/material';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
-
-import { useBD } from '../../../hooks/useBD';
-import { ImputSelectUnControler, ImputTextUnControler } from '../../../components/Inputs/InputCustom';
+import { ImputSelectUnControler, ImputTextUnControler } from '../../../../components/Inputs/InputCustom';
+import { TabelasContext } from '../../../../Context/DB/TabelasContext';
 
 
 
 export default function ModalEditaFields({dados}) {
   const [open, setOpen] = React.useState(false);
 
-  const {RenameColumnTable, tbl_table} = useBD()
+  const { 
+    RenameColumnTable,
+    table
+   } = React.useContext(TabelasContext);
 
   const [column_name, scolumn_name] = React.useState(dados?.column_name)
   const [column_type, scolumn_type] = React.useState(dados?.data_type)
@@ -33,10 +35,10 @@ export default function ModalEditaFields({dados}) {
     setOpen(false);
   };
 
-
-  const handleSubmit = async() => {    
+  const handleSubmit = async() => {  
+    handleClose()  
     await RenameColumnTable({
-      table_name: tbl_table.table_name,
+      table_name: table,
       column_name: dados?.column_name,
       new_column_name: column_name,
       column_type,
@@ -44,10 +46,7 @@ export default function ModalEditaFields({dados}) {
       column_default,
       column_not_null
     })
-    handleClose()
   }
-
-
 
   return (
     <div>

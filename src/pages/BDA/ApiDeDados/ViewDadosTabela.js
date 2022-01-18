@@ -10,17 +10,14 @@ import ApiIcon from '@mui/icons-material/Api';
 
 import TabelaFilter from '../../../components/Tabela/TabelaFilter';
 import { TabelasContext } from '../../../Context/DB/TabelasContext';
-import { useExecutApi } from '../../../hooks/useExecutApi';
 
 
 const headerHides = [
-  'created_at',
-  'updated_at',
 ]
 
 
 
-export function ViewDadosTabela() {
+export function ViewDadosTabela({dados}) {
   const { 
     table,
     set_loading
@@ -29,15 +26,13 @@ export function ViewDadosTabela() {
   const [tbl_dados, svalues] = React.useState([]);
   const [header, sheader] = React.useState([]);
 
-  const {List_Raw} = useExecutApi();
 
   useEffect(() => {
     async function getUser() {
       try {
       set_loading(true);
 
-      const result = await List_Raw(table)
-      const headers =  result.fields.map(key => {
+      const headers =  dados.fields.map(key => {
         return{
           Header: key.name,
           accessor: key.name,
@@ -46,7 +41,7 @@ export function ViewDadosTabela() {
       })
 
       sheader(headers)
-      svalues(result.rows)
+      svalues(dados.rows)
 
       set_loading(false);
 
@@ -55,7 +50,7 @@ export function ViewDadosTabela() {
       }
     }
     getUser(); 
-  }, [List_Raw, set_loading, table]);
+  }, [dados, set_loading]);
 
 
   

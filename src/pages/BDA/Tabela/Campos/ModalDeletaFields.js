@@ -1,20 +1,23 @@
 import * as React from 'react';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import { IconButton } from '@mui/material';
-import { useBD } from '../../../hooks/useBD';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { TabelasContext } from '../../../../Context/DB/TabelasContext';
 
-export default function ModalCriaTabela({Icon}) {
+export default function ModalDeletaFields({dados}) {
   const [open, setOpen] = React.useState(false);
 
-  const {CreatedTable } = useBD()
 
-  const [table_name, stable_name] = React.useState("")
+
+  const { 
+    DropColumnTable,
+    table
+   } = React.useContext(TabelasContext);
 
 
   const handleClickOpen = () => {
@@ -27,49 +30,47 @@ export default function ModalCriaTabela({Icon}) {
 
 
 
-  const handleSubmit = async() => {    
-    console.log(table_name)
-    await CreatedTable(table_name)
+  const handleSubmit = async() => {  
     handleClose()
+    await DropColumnTable({
+      table_name: table,
+      column_name: dados?.column_name,
+    })
+    
   }
-
 
 
   return (
     <div>
+      
       <IconButton 
-        sx={{
-        }}
         onClick={handleClickOpen}
         edge="end" 
-        aria-label="delete"
+        aria-label="edite"
+        size="small"
       >
-        <Icon/>
+        <DeleteIcon  fontSize="small" />
       </IconButton>
 
 
 
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>Criar tabela</DialogTitle>
+
+        <DialogTitle>Deletar</DialogTitle>
+
         <DialogContent>
+
+
           <DialogContentText>
-            A tabela deve ter um nome simples e será criada no banco de dados.
+            Tem certeza que deseja deletar o campo {dados.name}?
           </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Nome da tabela"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={table_name}
-            onChange={(e)=>{stable_name(e.target.value)}}
-          />
+
+
         </DialogContent>
+
         <DialogActions>
-          <Button onClick={handleClose}>Sair</Button>
-          <Button onClick={handleSubmit}>Criar</Button>
+          <Button onClick={handleClose}>Cancelar</Button>
+          <Button onClick={handleSubmit}>Deletar</Button>
         </DialogActions>
       </Dialog>
     </div>

@@ -1,75 +1,27 @@
 
-import React, { useMemo } from 'react';
-import { Grid, TextField } from '@mui/material';
+import React, { useContext } from 'react';
+import { Backdrop, CircularProgress, Grid, TextField } from '@mui/material';
 import { useExecutApi } from '../../../hooks/useExecutApi';
-import { FormeCriaAPI } from './FormeCriaAPI';
-import { TabelaAPIs } from './TabelaAPIs';
+import { TabelasContext } from '../../../Context/DB/TabelasContext';
+import { ViewDadosTabela } from './ViewDadosTabela';
 
 export function ApiDeDados() {
-
-  const { List, Creat, Update, Delete } = useExecutApi();
-
+  const [code, scode] = React.useState('');
   const [nome, snome] = React.useState('');
+  const [dadosResutl, sdadosResutl] = React.useState({});
 
-  const [dados, sdados] = React.useState([]);
+  const { 
+    set_loading,
+    loading
+   } = useContext(TabelasContext);
 
-  React.useEffect(() => {
-    List('tabela_api_list').then(dados => {
-      sdados(dados)
-    })
-  }, [List])
+  const {Sql_Raw, Creat} = useExecutApi();
 
-
-  const forme = useMemo(() => (
-          <FormeCriaAPI
-            onClick={ async(dados) => {  
-              await  Creat(
-                    'tabela_api_list', 
-                    {
-                      nome: dados.nome,
-                      url_api: dados.url_api,
-                      tipo_api: dados.tipo_api
-                    }
-            )
-            const data_result = await List('tabela_api_list')
-            sdados(data_result)
-            }}
-          />
-
-  ), [Creat, List]);
-
-  const memoizedErrors = useMemo(() => <TabelaAPIs dados={dados} />, [dados]);
-
-
-  const textField = useMemo(() => (<TextField
-    label="Nome da Api"
-    size="small"
-    value={nome}
-    onChange={(e) => {snome(e.target.value)}}
-  />), [nome]);
-
-
-
-  const header = useMemo(() => (<Grid item xs={12}
-    sx={{
-      display: 'flex',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-    }}
-  >
-    <p>Api de dados ( CRUD )</p>
-
-    {textField}
-    
-  </Grid>), [textField]);
 
 
 
   return ( 
     <Grid item xs={12}
-      sx={{ 
-        display: 'flex',
-      }}
     >
       <Grid item xs={12}
         sx={{
@@ -78,15 +30,73 @@ export function ApiDeDados() {
         }}
       >
 
-          {header}
+        <TextField
+          sx={{width: '100%'}}
+          label="Nome"
+          value={nome}
+          onChange={(e) => {snome(e.target.value)}}
+        />
 
-          {forme}
+        <TextField
+          sx={{width: '100%'}}
+          label="Code SQL"
+          multiline
+          maxRows={10}
+          minRows={4}
+          value={code}
+          onChange={(e) => {scode(e.target.value)}}
+        />
 
 
-          {memoizedErrors}
+
+        <button onClick={async () => {
+          set_loading(true);
+          const teste = await Sql_Raw({dados: code})
+          sdadosResutl(teste)
+          set_loading(false);
+        }}>
+          Executar
+        </button>
+
+        <button onClick={async () => {
+          set_loading(true);
+          await Creat("sql_query_custom", {
+            name_query: nome,
+            query_sql: code
+          })
+          set_loading(false);
+        }}>
+          Gravar
+        </button>
+
+
+
 
       </Grid>
 
+      <Grid item xs={12}
+        sx={{
+          pl: 1,
+          pr: 1,
+          pt: 4,
+        }}
+      >
+        <ViewDadosTabela dados={dadosResutl}/> 
+      </Grid>
+
+
+
+      
+      
+
+
+
+      <Backdrop
+        sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
     </Grid>
     
   );

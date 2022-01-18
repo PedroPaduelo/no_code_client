@@ -3,6 +3,7 @@ import React from 'react';
 import { Grid } from '@mui/material';
 import BDA from './BDA';
 import { BDProvider } from '../../Context/BDContext';
+import { TabelasProvider } from '../../Context/DB/TabelasContext';
 
 
 
@@ -23,7 +24,9 @@ export function BancoDeDados() {
       >
 
         <BDProvider>
-          <BDA />
+          <TabelasProvider>
+            <BDA />
+          </TabelasProvider>
         </BDProvider>
       </Grid>
     </Grid>

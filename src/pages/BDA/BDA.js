@@ -4,7 +4,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { Tabelas } from './Tabelas/Tabelas';
+import { Tabelas } from './Tabela/Tabelas';
 import { Dados } from './Dados/Dados';
 import { ApiDeDados } from './ApiDeDados/ApiDeDados';
 

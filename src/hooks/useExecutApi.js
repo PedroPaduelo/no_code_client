@@ -13,6 +13,12 @@ export function useExecutApi(){
     return data.result
   },[])
 
+  const List_Raw = useCallback(async(tabela) => {
+    
+    const {data} =  await api.get(`/List_Full_Raw/${tabela}`);
+    return data.result
+  },[])
+  
   const Update = useCallback(async(tabela, dados) => {
     const {data} =  await api.post(`/Update_By_Id/${tabela}`, dados);
     return data.result
@@ -23,10 +29,23 @@ export function useExecutApi(){
     return data.result
   },[])
 
+  const Sql_Raw = useCallback(async(dados) => {
+    
+    const {data} =  await api.post(`/Execut_Raw`,dados);
+
+    return data.result
+  },[])
+
+
+  
+
   return {
     List,
+    List_Raw,
     Creat,
     Update,
-    Delete
+    Delete,
+
+    Sql_Raw
   }
 }

@@ -1,10 +1,10 @@
 import React , { useMemo } from 'react';
-import { useTable , usePagination, useFilters, useGlobalFilter } from 'react-table'
+import { useTable , usePagination } from 'react-table'
 
 import { Grid, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-import Paginacao from '../TabelaPaginada/Paginacao/Paginacao';
+// import Paginacao from '../TabelaPaginada/Paginacao/Paginacao';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +21,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function TabelaFilter({
     ariaLabel,
-    label,
     size,
     headers,
     headerHides,
@@ -75,14 +74,11 @@ export default function TabelaFilter({
       }
 
     }, 
-    useFilters, 
-    useGlobalFilter,
     usePagination)
 
   
   return (
     <Grid item xs={12}>
-
       <Table 
         className={classes.table} 
         size={size || 'small'} 
@@ -141,8 +137,8 @@ export default function TabelaFilter({
                       {...cell.getCellProps()}
                     >
 
-                      {/* {cell.render('Cell')} */}
-                      {JSON.stringify(cell.value)?.replace('"', '')?.replace('"', '')} 
+                      {cell.render('Cell')}
+                      {/* {JSON.stringify(cell.value)?.replace('"', '')?.replace('"', '')}  */}
                      
 
                     </TableCell>
@@ -155,7 +151,7 @@ export default function TabelaFilter({
       </Table>
 
 
-
+{/* 
 
 
 
@@ -169,7 +165,7 @@ export default function TabelaFilter({
         pageOptions = {pageOptions}
         pageCount = {pageCount}
         canNextPage = {canNextPage}
-      />
+      /> */}
 
     </Grid>
   );
