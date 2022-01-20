@@ -15,7 +15,7 @@ export function useExecutApi(){
 
   const List_Raw = useCallback(async(tabela) => {
     
-    const {data} =  await api.get(`/List_Full_Raw/${tabela}`);
+    const {data} =  await api.get(`/BD_P_List_Dados/${tabela}`);
     return data.result
   },[])
   
