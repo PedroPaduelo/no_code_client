@@ -88,6 +88,8 @@ export default function ModalCriaFields() {
           <MenuItem value={"dateTime"}>DateTime</MenuItem>
           <MenuItem value={"time"}>Time</MenuItem>
           <MenuItem value={"timestamp"}>Timestamp</MenuItem>
+          <MenuItem value={"array"}>ARRAY</MenuItem>
+          
 
           <MenuItem value={"json"}>json</MenuItem>
           
