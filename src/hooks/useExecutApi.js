@@ -40,6 +40,16 @@ export function useExecutApi(){
      }
   },[])
 
+  const Api_Knext = useCallback(async(dados) => {
+    try {
+      const {data} =  await api.post(`/Api_Knext `,dados);
+      console.log(data.result)
+      return data.result
+     } catch (error) {
+      return false
+     }
+  },[])
+
 
   
 
@@ -50,6 +60,7 @@ export function useExecutApi(){
     Update,
     Delete,
 
-    Sql_Raw
+    Sql_Raw,
+    Api_Knext
   }
 }

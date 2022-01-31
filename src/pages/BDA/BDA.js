@@ -7,6 +7,7 @@ import Box from '@mui/material/Box';
 import { Tabelas } from './Tabela/Tabelas';
 import { Dados } from './Dados/Dados';
 import { ApiDeDados } from './ApiDeDados/ApiDeDados';
+import { ApiKnex } from './ApiKnex/ApiKnex';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -55,7 +56,8 @@ export default function BDA() {
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Tabelas" {...a11yProps(0)} />
           <Tab label="Dados" {...a11yProps(1)} />
-          <Tab label="Api de dados" {...a11yProps(2)} />
+          <Tab label="Sql Raw" {...a11yProps(2)} />
+          <Tab label="API Knex.js" {...a11yProps(3)} />
         </Tabs>
       </Box>
 
@@ -69,6 +71,10 @@ export default function BDA() {
 
       <TabPanel value={value} index={2}>
         <ApiDeDados/>
+      </TabPanel>
+
+      <TabPanel value={value} index={3}>
+        <ApiKnex/>
       </TabPanel>
 
     </Box>
