@@ -29,7 +29,7 @@ export function useExecutApi(){
     return data.result
   },[])
 
-  const Sql_Raw = useCallback(async({dados}) => {
+  const Sql_Raw = useCallback(async(dados) => {
     try {
       const {data} =  await api.post(`/Execut_Raw`,{dados});
       console.log(data.result)
