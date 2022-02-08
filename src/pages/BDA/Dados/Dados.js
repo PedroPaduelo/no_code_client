@@ -19,7 +19,6 @@ export function Dados() {
   const { 
     set_modal_cria_table,
     set_modal_cria_campo,
-    set_loading,
     loading
    } = useContext(TabelasContext);
 

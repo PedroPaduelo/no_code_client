@@ -220,22 +220,6 @@ const methodo_options = [
   
 ];
 
-const tipo = [
-  {
-    value: 'select',
-    label: 'select',
-  },
-  {
-    value: 'column',
-    label: 'column',
-  },
-  {
-    value: 'where',
-    label: 'where',
-  }
-];
-
-
 
 // -------------------------------------------------- //
 

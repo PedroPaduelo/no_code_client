@@ -4,8 +4,6 @@ import { useTable , usePagination } from 'react-table'
 import { Grid, Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 
-// import Paginacao from '../TabelaPaginada/Paginacao/Paginacao';
-
 
 const useStyles = makeStyles((theme) => ({
   table: {
@@ -50,15 +48,7 @@ export default function TabelaFilter({
     headerGroups,
     prepareRow,
     page,
-    canPreviousPage,
-    canNextPage,
-    pageOptions,
-    pageCount,
-    gotoPage,
-    nextPage,
-    previousPage,
-    getTableProps,
-    state,
+    getTableProps
   } = useTable(
     { 
       
@@ -151,21 +141,9 @@ export default function TabelaFilter({
       </Table>
 
 
-{/* 
 
 
 
-
-      <Paginacao
-        gotoPage = {gotoPage}
-        previousPage = {previousPage}
-        nextPage = {nextPage}
-        canPreviousPage = {canPreviousPage}
-        pageIndex = {state.pageIndex}
-        pageOptions = {pageOptions}
-        pageCount = {pageCount}
-        canNextPage = {canNextPage}
-      /> */}
 
     </Grid>
   );
